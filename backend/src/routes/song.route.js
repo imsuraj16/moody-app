@@ -22,9 +22,23 @@ router.post('/songs', upload.single('audio'), async (req, res) => {
 
     res.status(201).json({
         msg: 'song created',
-        song
+        songs : song
     })
 
+})
+
+
+router.get('/songs', async (req, res) => {
+
+const{mood} = req.query
+
+    const songs = await songModel.find({
+        mood : mood
+    })
+
+    res.json({
+        songs
+    })
 })
 
 
